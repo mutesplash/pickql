@@ -5,7 +5,7 @@ namespace pickql;
 internal class ElementDbContext : DbContext {
 
     protected override void OnModelCreating(ModelBuilder modelBuilder) {
-        new ElementConfiguration().Configure(modelBuilder.Entity<LegoElement>());
+        new LegoElementConfiguration().Configure(modelBuilder.Entity<LegoElement>());
     }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {

@@ -20,7 +20,7 @@ public class ElementQueryController : ControllerBase {
     
     }
 
-    [Route("element/{id}")]
+    [Route("{id:int}")]
     //[HttpGet("{id}")]
     public IActionResult SingleElement(int id) {
 
@@ -38,7 +38,7 @@ public class ElementQueryController : ControllerBase {
         //ColorNumber CatalogType PurchaseType, Available= true, Json = "{}"
     }
 
-    [Route("design/{id}")]
+    [Route("design/{id:int}")]
     public IActionResult ElementsForDesign(int id) {
 
         // For now, Don't use FirstOrDefault because you'll forget that DefaultIfEmpty exists and you need that
@@ -46,7 +46,7 @@ public class ElementQueryController : ControllerBase {
         // ToList synthesizes the query into IEnumerable
         IEnumerable<LegoElement> q = context.Elements.Where(x => x.DesignNumber == id).ToList();
         
-        if ( q != null )  {
+        if ( q != null && q.Count() > 0 )  {
             var result = q.Select(
                 item => 
                     JsonSerializer.Deserialize<object>(item.Json)
@@ -59,12 +59,12 @@ public class ElementQueryController : ControllerBase {
         }
     }
 
- [Route("color/{id}")]
+ [Route("color/{id:int}")]
     public IActionResult ElementsForColor(int id) {
 
         IEnumerable<LegoElement> q = context.Elements.Where(x => x.ColorNumber == id).ToList();
         
-        if ( q != null )  {
+        if ( q != null && q.Count() > 0 )  {
             var result = q.Select(
                 item => 
                     JsonSerializer.Deserialize<object>(item.Json)
@@ -99,7 +99,7 @@ public class ElementQueryController : ControllerBase {
         }
     }
 
-    [Route("Everything")]
+    [Route("everything")]
     [HttpGet]
     public async Task<IActionResult> Get() {
         return Ok( new { context.Elements } );

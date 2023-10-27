@@ -3,7 +3,7 @@ namespace pickql;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-public class ElementConfiguration : IEntityTypeConfiguration<LegoElement>
+public class LegoElementConfiguration : IEntityTypeConfiguration<LegoElement>
 {
     public void Configure(EntityTypeBuilder<LegoElement> builder)
     {
